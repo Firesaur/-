@@ -33,6 +33,7 @@ static pixel_t* pixel_at(bitmap_t* bitmap, int x, int y)
     return bitmap->pixels + bitmap->width * y + x;
 }
 
+
 /* Write "bitmap" to a PNG file specified by "path"; returns 0 on
 success, non-zero on error. */
 
