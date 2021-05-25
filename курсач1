@@ -8,6 +8,7 @@
 #include <stdint.h>
 #include <time.h>
 
+
 /* A coloured pixel. */
 int count = 0;
 typedef struct {
