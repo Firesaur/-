@@ -168,17 +168,17 @@ void drawRect(double startX, int startY, double width, int height, bitmap_t frui
 void drawArr(bitmap_t fruit, int* arr, int size) {
     double elemSize = 1280.0 / size;
     for (int i = 0; i < size; i++) {
-        drawRect(i * elemSize, 720 - (arr[i] * 3), elemSize, (arr[i] * 3), fruit);
+        drawRect(i * elemSize, 300 - (arr[i] * 3), elemSize, (arr[i] * 3), fruit);
     }
 
 }
 void drawArrWithSelectedItems(bitmap_t fruit, int* arr, int size, int item1, int item2) {
     double elemSize = 1280.0 / size;
     for (int i = 0; i < size; i++) {
-        drawRect(i * elemSize, 720 - (arr[i] * 3), elemSize, (arr[i] * 3), fruit);
+        drawRect(i * elemSize, 300 - (arr[i] * 3), elemSize, (arr[i] * 3), fruit);
     }
-    drawRedRect(item1 * elemSize, 720 - (arr[item1] * 3), elemSize, (arr[item1] * 3), fruit);
-    drawRedRect(item2 * elemSize, 720 - (arr[item2] * 3), elemSize, (arr[item2] * 3), fruit);
+    drawRedRect(item1 * elemSize, 300 - (arr[item1] * 3), elemSize, (arr[item1] * 3), fruit);
+    drawRedRect(item2 * elemSize, 300 - (arr[item2] * 3), elemSize, (arr[item2] * 3), fruit);
 
 }
 void clearCanvas(bitmap_t fruit) {
@@ -263,8 +263,12 @@ void quickSort(int* numbers, int left, int right, bitmap_t fruit, int* arr, int 
 
 int main(int argc, char** argv)
 {
-    int size;
+   int size;
     int r = strncmp(argv[1], "-h");
+    if (argc == 1) {
+        printf("Please add arguments like -h");
+        return 0;
+    }
     if (!strncmp(argv[1], "-h")) {
         printf("Program for quick sort visualization.\n General options : \n -n Number of values to sort \n -h Show help ");
         return 0;
@@ -272,9 +276,13 @@ int main(int argc, char** argv)
     else if (!strncmp(argv[1], "-n")) {
         size = atoi(argv[2]);
     }
+    else {
+        printf("Please add normal arguments like -h");
+        return 0;
+    }
     bitmap_t fruit;
     int x;
-    int y;
+    int y; 
 
     int* arr;  // указатель на массив
     // Выделение памяти
@@ -286,11 +294,14 @@ int main(int argc, char** argv)
     }
 
     fruit.width = 1280;
-    fruit.height = 720;
+    fruit.height = 300;
 
     fruit.pixels = calloc(sizeof(pixel_t), fruit.width * fruit.height);
 
 
     quickSort(arr, 0, size - 1, fruit, arr, size); // вызов функции сортировки
+    
+    free(arr);
+    free(fruit.pixels);
     return 0;
  }
